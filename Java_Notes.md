@@ -83,3 +83,80 @@ public static int add(int a, int b) =====> Method Signature/Declaration
   int ans = a + b;
   return ans;
 }         ---------------- Method definition ends   ----------------
+
+
+public static void main()
+
+File Naming Rules:
+
+- If file consist of non-public classes then file name can be anything.
+e.g
+
+    class A {} 
+    File name can be B.java
+
+    Compilation : javac B.java
+    Run         : java A
+
+- If file consist of "public" class then file name MUST match to public class.
+
+  public class A {}
+  File name MUST be A.java
+
+- Can we have more than one public classes in one file ? NO. (Compilation error)
+
+Puzzle:
+public class A {}
+class B { public static void main(String[] args) {} }
+class C { }
+
+What should be file name? It must be "A.java"
+How many .class files will be generated? => 3 classes i) A.class ii) B.class iii) C.class
+Which class is used with "#java" command?
+  Any class having main() funciton.
+  Ans: #java B
+
+In Real application we have multiple classes, however entry point function main() will be there ONLY in one class from where execution starts.
+
+Ideally we should be having one class in one file.
+
+OOP concepts:
+Following are Object oriented concepts in Java.
+1) Encapsulation
+2) Polymorphims
+3) Inheritance
+4) Abstraction
+
+Encapsulation:
+- Biding related things together is called as an encapsulation.
+"Class" is an example of encapsulation.
+
+What is "Class" concept?
+
+- Class is a template/blueprint of an object.
+- Any entity having properties(state) and functions (behaviours) can be considered as a class.
+- It's like a empty photo frame.
+- Example of classes:
+  Student, Employee, MobileApp, Electornics, Country etc.
+- "object" given actual existance to a class. Without object there is no meaning to a class.
+
+class Employee {
+  // properties of Employee class
+  int empId;
+  float salary;
+  String name;
+  // functions of Employee
+
+  getEmpDetails() { }
+  getInHandSalary() {}
+  getTaxDetails() {}
+  ...
+}
+
+What is an Object?
+- Object is an "instnace" of a class.
+- Object gives real meaning to a class.
+- If we have to store information of 5 employees, we will end up creating 5 objects of Employee class.
+- In Java, we create an object using "new" keyword.
+  e.g.  Employee e1 = new Employee();
+        Student  s1 = new Student();

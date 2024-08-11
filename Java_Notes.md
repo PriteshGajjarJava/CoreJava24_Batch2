@@ -160,3 +160,83 @@ What is an Object?
 - In Java, we create an object using "new" keyword.
   e.g.  Employee e1 = new Employee();
         Student  s1 = new Student();
+
+Primitive Types/Data Types in Java:
+
+There are 8 primitive types:
+
+byte    1 byte
+short   2 bytes
+int     4 bytes
+long    8 bytes
+
+float   4 bytes
+double  8 bytes
+
+char    2 bytes (UTF/Multi-byte format)
+boolean 1 bit (true-1, false-0)
+
+Wrapper class:
+Java provides class for each and every primitive type which is called as "Wrapper" class.
+e.g. Integer is a wrapper class for int type.
+This is required to represent data types as an object (OOP)
+
+Typecasting:
+Convering one type into another type is called as type-casting.
+There are 2 types:
+a) Implicit type casting (Converting small type into big type) e.g.   short -> int
+b) Explicit type casting (Converting big type into small) e.g. int -> short
+
+Integer Wrapper Class Functions:
+
+How to create Integer object?
+ Integer obj = Integer.valueOf(50); // Old way Integer obj = new Integer(50)
+
+What is AutoBoxing? 
+      int ans = i + obj; // AUTO Boxing (obj value will be consider)
+
+How to find Integer Max/Min value?
+      System.out.println(Integer.MAX_VALUE);
+      System.out.println(Integer.MIN_VALUE);
+
+How to convert String to integer?
+      String s = "100";
+      int num = Integer.parseInt(s); // "100" => 100 (String to number conversion)
+
+How to convert Decimal to binary, hex, octal?
+      System.out.println(Integer.toBinaryString(12));//1100
+      System.out.println(Integer.toHexString(81));
+      System.out.println(Integer.toOctalString(71));
+
+What all things a class can consist of?
+- Instance properties
+- Static properties
+- Instance functions
+- Static functions
+- Constructor (default, parmeterised)
+- Instance block
+- Static Block
+- Inner class
+
+Instance properties:
+- Properties of an object.
+- Also called as "non-static" properties
+- Accessed using object/instance
+- Every object gets dedicated memory for instance properties.
+
+Static properties
+- Properties of a class
+- Declared using "static" keyword
+- Accessed directly using class name
+
+Instance function:
+- Also called as "non-static" functions.
+- Functions which accesses/modifies instance properties are called as "instance" functions.
+- We need an object of a call to invoke/call instance functions.
+
+Static function:
+- Declared using "static" keyword
+- Functions which accesses/modifies static properties are called as "static" functions.
+- We can call static functions directly using a class name
+
+

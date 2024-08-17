@@ -239,4 +239,95 @@ Static function:
 - Functions which accesses/modifies static properties are called as "static" functions.
 - We can call static functions directly using a class name
 
+Constructor :
+- Special function whose name is same as class name.
+- It does NOT have return type
+- It gets called automatically when object of class is created.
+- For one class we can have multiple constructors (Constructor can be overloaded)
+- There are types of constructors in Java:
+  a) Default constructor (non-parameterised constructor) - Constructor without argument.
+  b) Parameterised constructor - Constructor with arguments
+- If we don't write any constructor in a class, then JVM would provide default constructor.
+- Access specifier of constructor should match with class acess specifier. e.g. If class is declared with "public" scope then constrcutor can be declared as "public".
+- In Java there is NO copy constructor.
+- Main use of constructor is to initialise data for an object which is being constructed.
+- In case of inheritance, to call parent class constructor we use keyword "super".
+- To call own (self) constructor we can use "this" keyword.
+
+Ex.
+class Student {
+  int id;
+  String name;
+  Student() { } // Default constructor
+
+  // Parameterised constructor
+  Student(int id, String name) {
+    this.id = id;
+    this.name = name;
+  }
+}
+
+Student s1 = new Student(); // Default constructor will be called
+Student s2 = new Student(5, "Raj");
+
+
+Stack v/s Heap memory:
+
+For eavery java process dedicated memory is allocated (in MBs).
+JVM would divide that memory into Stack and Heap.
+
+What goes on Stack?
+- For every function call stack frame gets created on Stack.
+- Each stack frame contains local variables of that function including references.
+- Stack frame gets deleted automatically when function is completed.
+- First stack frame created on Stack is of "main()" function.
+
+What goes in Heap?
+- Class along with method definitions goes on Heap area.
+- JVM would load class in Heap memory as and when needed (Lazy class loading)
+- Objects created using "new" operator goes in Heap memory.
+- Heap memory is cleaned up periodically by in-build process of JVM i.e. "Garbage Collection".
+
+Reference v/s Object:
+- We create object in java using "new"
+e.g
+    Student s1 = new Student()
+- In this case, 
+    s1 is a reference stored on Stack and it points to an object which is being created on Heap memory.
+- Reference is kind of "pointer" which points to an object in heap memory.
+- Value of reference is memory address.
+
+Student s1 = new Student();
+Student s2 = new Student();
+Studnet s3;
+
+In above example, there are 3 references(s1,s2,s3) and object count is 2. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

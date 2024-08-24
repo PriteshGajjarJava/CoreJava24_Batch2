@@ -303,6 +303,50 @@ Studnet s3;
 
 In above example, there are 3 references(s1,s2,s3) and object count is 2. 
 
+Which "Pass By" menchanism Java uses for Function calls?
+
+    Java uses "Pass By Value" menchanism for function calls.
+
+Static block:
+- Static block can be declared within class with keyword "static".
+- There can be more than one static blocks in one class.
+- Static block gets executed only ONCE when class is loaded in the memory by JVM.
+- It's guaranteed that static block will be executed only once.
+- Logic which you want to execute only onces is generally added in static block.
+    e.g.
+        - Creating DB connection (JDBC)
+        - It can be used to implement "Singleton" design pattern.
+- Can we call function from static block?
+        Yes. To call static funciton use class name.
+             To call instance function create an object.
+- If we have main() funcition and "static block" then which will get executed first?
+    -> Static block will get executed before main() as it gets executed on class loading.
+
+ex.
+        class A {
+            static {
+                // code
+            }
+        }
+
+Instance block:
+- It's a block inside a class whihc doesn't have any name.
+- It is written inside a class outside methods.
+    e.g.
+            class A {
+                int a;
+
+                {
+                    // instance block
+                }
+                void fun() {
+                    ...
+                }
+            }
+- Instance block gets executed whenever new object is created.
+- If we have constructor and instance block in a class, first instance block gets executed.
+- Any common code you require to execute during initialisation can be added in instance block.
+- It is also called as "Initialisation Instance Block" (IIB)
 
 
 

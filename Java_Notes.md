@@ -348,4 +348,16 @@ Instance block:
 - Any common code you require to execute during initialisation can be added in instance block.
 - It is also called as "Initialisation Instance Block" (IIB)
 
+Arrays:
+- Array is collection of similar type of elements.
+- Size of an array is fixed (static), we can not change size of an array later.
+- "length" property can be used to derive size of an array.
+- Array elements are accessed using "index"
+- Array index starts from 0.
+- Last elements can be accessed using arr[arr.length-1]
 
+ex.
+  int[] arr = new int[5];
+  int[] arr = {1,3,4,5,2};
+  String[] cities = new String[5];
+  Student[] students = new Student[10];

@@ -361,3 +361,74 @@ ex.
   int[] arr = {1,3,4,5,2};
   String[] cities = new String[5];
   Student[] students = new Student[10];
+
+
+String:
+
+- String is sequnce of characters.
+- In java "String" is a class from "java.lang" package.
+- We can create String in following ways.
+    String s1 = "Java";
+    String s2 = new String("Java");
+- String objects are "immutable".
+  We can NOT modify string content directly. Any changes to string will result into new string.
+  e.g.
+      String s1 = "java";
+      s1.toUpperCase();
+      SOP(s1); // Output will be "java"
+
+      If we have to change s1 to "JAVA" then code should be updated like below.
+      String s1 = "java";
+      s1 = s1.toUpperCase();
+      SOP(s1); // Output will be "JAVA"
+
+String Functions:
+
+How to find length of String? => length()
+String s = "Java";
+int len = s.length(); // 4
+
+How to get character by index? => charAt(int index)
+
+String s = "Computer";
+s.charAt(3); // index starts from 0 (Ans is 'p')
+
+Case conversion. => toUpperCase(), toLowerCase()
+
+Trimming => trim()
+
+Search functions:
+  1) indexOf(str)/lastIndexOf(str)
+  2) contains()
+e.g. String s = "Today is Sunday";
+     int i = s.indexOf("day"); // 2
+     int j = s.lastIndexOf("day"); // 12
+     boolean b = s.contains("day"); // true
+      int k = s.indexOf("Abc");// -1
+
+Substring functions:
+1) substring(startIndex)
+2) substring(startIndex,endIndex)
+String s = "Learning Java";
+String str1 = s.substring(1); // "earning Java";
+String str2 = s.substriing(1,5); // "earn"
+  
+Word operations:
+In many cases we require to break string into words. => split()
+
+String s1 = "Today is Sunday";
+String[] words = s1.split(" ");// Splitting string by space
+// output of above is words = ["Today", "is", "Sunday"]
+
+Array of string to string?
+e.g. String[] words = {"Today", "is", "Sunday"};
+String s1 = String.join(" ", words); // "Today is Sunday"
+String s2 = String.join("#", words); // "Today#is#Sunday"
+
+Chracter array to String conversion?
+char[] arr = {'j','a','v','a'};
+String s = new String(arr); // "java"
+
+String to chracter array?
+String s = "java";
+char[] arr = s.toCharArray(); // {'j','a','v','a'}

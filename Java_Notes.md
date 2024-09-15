@@ -365,10 +365,10 @@ ex.
 
 String:
 
-- String is sequnce of characters.
+- String is sequence of characters.
 - In java "String" is a class from "java.lang" package.
 - We can create String in following ways.
-    String s1 = "Java";
+    String s1 = "Java"; // It goes in "String literal pool"
     String s2 = new String("Java");
 - String objects are "immutable".
   We can NOT modify string content directly. Any changes to string will result into new string.
@@ -396,7 +396,7 @@ s.charAt(3); // index starts from 0 (Ans is 'p')
 Case conversion. => toUpperCase(), toLowerCase()
 
 Trimming => trim()
-
+String s1 = "    ABC   PQR   "; //"ABC   PQR"
 Search functions:
   1) indexOf(str)/lastIndexOf(str)
   2) contains()
@@ -432,3 +432,168 @@ String s = new String(arr); // "java"
 String to chracter array?
 String s = "java";
 char[] arr = s.toCharArray(); // {'j','a','v','a'}
+
+-------*****------------*****------------*****------------*****------------*****------------*****------------*
+
+Inheritance:
+
+- OOP concept
+- It is relationship between two classes (parent and child).
+- A child class can reuse propreties and functions from parent class.
+- We can achieve "Reusability" principle using inheritance.
+- It generally represents "IS-A" relationship.
+- "extends" keyword is used to indicate this relationship.
+e.g.
+  class Person {}
+  class Emp extends Person {}
+- Child won't be able to access "private" properties/functions from parent class.
+- "super" keyword is used in child class to refer parent class properties/functions/constructor.
+
+Types of inheritance:
+1) Single level inheritance
+    class A {}
+    class B extends A {}
+
+2) Multi-level inheriance:
+    class A {}
+    class B extends A {}
+    class C extends B {}
+
+3) Hierarchical inheritance:
+    class A {}
+    class B extends A {}
+    class C extends A {}
+    class D extends B {}
+    class E extends B {}
+
+4) Multiple Inheritance:
+  In Java multiple inheritance is NOT allowed with classes. It is allowed only with Interfaces.
+    class A {}
+    class B {}
+    class C extends A, B {} ERROR
+
+    interface A {}
+    interface B {}
+    class C implements A, B {} // ALLOWED  
+
+Constructor Chaining:
+- In case of inheritance, when we create an object of child class then constructors are invoked from top to bottom. 
+
+
+"super" keyword:
+- "super" keyword is used in child class to access parent class properties/functions.
+- super.x => Accessing property named "x" from parent class.
+- super.fun() => calling parent class function named fun()
+- super() => Calling default constructor of parent
+- super(para1,para2..) => Calling parameterised constructor of parent class
+- Call to parent class constructor can be done ONLY from constructor of child class.
+
+ex.
+    class Person {
+      String name;
+      int age;
+      Person() {}
+      Person(String name, int age) { this.name = name; this.age = age; }
+      void showDetails() { System.out.println("Name=" + this.name +", Age="+this.age);}
+    }
+    class Student extends Person {
+      int rollNo;
+      Student(int rollNo, String name, int age) {
+        super(name, age); // call to parent class constructor
+      }
+      void showDetails() {
+        System.out.println("Name=" + super.name); // accessing parent class property
+        super.showDetails(); // calling parent class function
+        System.out.println("RollNo" + this.rollNo); // accessing own property using "this" keyword.
+      }
+    }
+
+1st line of any constructor is reserved to make call to parent class constructor.
+JVM checks 1st line of constructor if call to parent class constructor is missing then JVM would add explicit call 
+to a parent class constructor using "super()".
+
+Following is ERROR scenario: Default constructor is missing in parent class.
+class A{
+  A(int x) { SOP("A:Constructor");}
+}
+class B extends A {
+}
+
+"this" keyword:
+- Used to access own property/functions
+- It can be used only in instance functions(including constructor)
+- In static function we can NOT use "this" keyword.
+- "this" is a reference(pointer) to current object.
+
+class A {
+  int x = 4;
+  void fun(int x) {
+    System.out.println(x); // 10 => Local variable "x"
+    System.out.println(this.x); // 4 => instance variable "this.x"
+  }
+  public static void main(String[] args) {
+    A obj = new A();
+    obj.fun(10);
+  }
+}
+
+- We can use "this" keyword to call constructor of own class(self constructor call).
+- this() : To call default constructor of self.
+  this(para1,..) : To call parameterised constructor of self.
+
+  Polymorphism:
+
+  - OOP concept
+  - Meaning : One name many forms
+  - There are 2 types of Polymorphism:
+    a) Compile-time/static polymorphism
+    b) Run-time/dynamic polymorphism
+  - "Method Overloading" is an example of Compile-time polymorphism.
+  - "Method Overriding" is an example of Run-time polymorphism.
+
+Method Overloading:
+- Type of polymorphism.
+- Method overloading means more than one method with same name but with difference in parameters.
+- Parameter difference can be of following:
+  i) Parameter types are different
+  ii) Parameter count is different
+  iii) Parameter sequence is different
+- Method overloading does NOT depends on return type.
+- It is compile time polymorphism - because decision of which overloaded method to be called is taken at compile-time.
+ex.
+int add(int a, int b) {}
+float add(float a, float b) {} // count of parameters is same but change in type
+String add(String a, String b) {}
+int add (int a, int b, int c) {} // count of parameter changes
+String add (int a, String b) {}
+String add (String a, int b) {} // sequnece of parameters changes
+
+float add(int a, int b) {} ERROR => This conflicts with 1st function. Overloading does NOT depend on return type.
+
+
+Method Overriding:
+- Type of polymorphism.
+- It represents "Run-time" Polymorphism.
+- This concept can be seen only in inheritance (There has to be relationship)
+- Using method overriding a child class can write exactly same method as of parent class with change in implementation.
+- Method overriding means -> Method with same signature in child class.
+- With the help of inheritance a child class always has an option of reusing parent class method. However for some reason if child class want to keep method name same and want to have own implemenation then child class can override parent class method.
+- During overriding -> Child class MUST keep same signature.
+- Two special cases during overriding:
+  1) Changing scope/access-specifier of method
+     A child class can increase the scope of method but can not decrease it.
+    If method is declared with "public" then child must keep "public" scope
+    If method is declared with "default" child can keep scope as "default", "protected" or "public" 
+    
+  2) "throws" keyword in signature:
+     If parent class method has "throws" in signature then child class has following options:
+      e.g void f() throws IOException {}
+      a) Keep signature as is with "throws"
+      b) Remove throws completely
+      c) Exception type can be changed to a child exception class.
+
+- In order to say method is overridden first condition is signature part, however more important condition is that "runtime" polymorphism behavior must exists between overridden methods.
+- Following methods can NOT be overridden:
+  a) static methods
+  b) final methods
+  c) private methods

@@ -597,3 +597,275 @@ Method Overriding:
   a) static methods
   b) final methods
   c) private methods
+
+  **Abstract class **
+
+    Abstract method: It is a method which is declared using "abstract" keyword.
+    Abstract method does NOT have deifinition and it ends with semicolon.
+    Its mandatory for child class to override abstract method. So using "abstract method" a parent class can force child class to override particular method.
+
+Abstract class:
+
+    We can declare abstract class using "abstract" keywrod. e.g. abstract class A {}
+
+    Abstract class can consist of abstract methods. It's not mandatory to have abstract methods in that class.
+
+    Abstract class can NOT be instantiated(We can NOT create object of abstract class)
+
+    When a child class inherits an abstract class, child class MUST override all abstract methods from parent class.
+
+    If child class fails to override any of abstract methods from parent, then that child class also can be declared as abstract class.
+
+    Even if we can not create object of abstract class, still it can have constrcutor. Constructor of abstract class will be called when we create object of child class.
+
+    Abstract class can also have it's own properties(instance/static) which can be accessed using a child class.
+
+Interface:
+
+- It's a type in Java declared using "interface" keyword.
+	e.g.
+	interface A {}
+	
+- All variables of interface are by default "public static final"
+
+- All methods of interface are by defaute "public abstract"
+
+- As all methods of interface are abstract we don't have to use abstract keyword (it's optional)
+
+- Main purpose of an interface is to define a CONTRACT, which child class can implement.
+
+- A child class can inherite an interface usign "implements" keyword.
+
+- Multiple inheritance is possible with interfaces. Onc class can inherit more than one interfaces.
+	
+  e.g.
+  	interface A {}
+	interface B {}
+	class C implements A, B {}
+	
+- Interface can NOT be instantiated. (we can not create object of interface)
+- Interface does NOT have instance properties(only static properties are allowed)
+- We can NOT have constructor in interface.
+
+Ex of interfaces: Runnable, Map, List, Set
+
+Marker/Tagging interfaces:
+- Special in-built interfaces in java which does NOT have any methods. They are used to tag
+special features which JVM understands.
+e.g. To implement clonining your class must inherit marker interface named "Cloneable"
+To do serialization in your class, you must inherit marker interface named "Serializable"
+
+Abstract Class v/s Interface:
+
+
+            Abstract class            Interfaces
+
+1) "abstract" keywrod is used       "interface" keyword is used.
+e.g. abstract class A {}            interface A {}
+
+2) To inherit abstract class        To inherit interface, we will use "implements" keyword
+we will use "extends" keyword 
+
+3) Constructor - YES                No constructor
+
+4) It can have both abstract &      All Interface methods are by defeault "abstract" methods.
+non-abstract methods.
+
+5) Static/instance properties-YES   Only static properties are allowed with "final" keyword(constant)
+
+6) Multiple inhertiance is NOT      Multiple inheritance is possible.
+possible.
+
+Exception Handling:
+
+There are 2 types of errors.
+
+- Compilation errors e.g. Syntax error (semicolon missing, bracket missing, wrong function name etc)
+- Runtime errors These errors occurs at runtime due to some programming mistake or user input.
+
+Exception:
+Exception is runtime error which causes program to terminate abnormally.
+If exception occurs at runtime and if it's not handled then program is terminated.
+
+If there are 10 lines and exception occurs at 3rd line (and if it's not handled), program will be terminated and lines from 4-10 are not executed.
+
+How to handle Exceptions?
+Solution is : Use "try-catch-finally" block.
+e.g
+class Demo1 {
+    public static void main(String[] args) {
+        System.out.println("Start");
+        int[] a = {1,2,3,4,5};
+        System.out.println(a[1]);
+
+        try {
+            System.out.println(a[10]);
+        }catch(ArrayIndexOutOfBoundsException e) {
+            System.out.println("Invalid index accessed..");
+        }
+
+        System.out.println(a[3]);
+        System.out.println("End");
+    }
+}
+
+What happens when exception is detected?
+- Whenever exception occurs, JVM identifies type of an exception. After identifying type of an exception, JVM would create an object of particular exception and throws exception object.
+- JVM checks if that particular exception is handled by your code:
+    If Yes -> JVM will go into "catch" block
+    If No -> Program will be terminated.
+    
+
+**How to handle Exceptions?**    
+`Java provides try-catch-finally blocks to do exception handling.`
+
+1) "try" block
+In try block we write lines where there is chance of an exception. Ideally we should keep minimal code in "try" block.
+
+ "try" block Syntax:
+    try { // lines of code where there is possiblity of an exception }
+
+
+2) "catch" block
+"catch" block is an exception handler block which gets executed ONLY when exception occurs. We can write multiple catch blocks with try. If exception occurs, JVM would find best matching catch block based on exception and only one catch block will be executed.
+Order of multiple catch block must be child and then later parent. (Parent at bottom)
+
+Syntax: catch(<Exception-class> obj) { // Exception handling logic }
+
+
+3)"finally" block
+Syntax: finally { // Code which you want to execute in both scenarios success/failure. }
+
+With try-catch pair, we can add at most one "finally" block.(It's optional).
+"finally" block gets executed in both failure/success scenarios.
+Generally logic of cleanup is written in "finally" block.
+e.g Closing DB connection, Closing File, Closing socket etc.
+
+Two conditions where "finally" will NOT be executed:
+  -  If "try" block is not hit
+  -  If it encounters `System.exit(0)` before reaching finally block.
+
+Possible combinations of try-catch-finally:
+   1) try-catch
+   2) try-multiple catch blocks
+   3) try-catch-finally
+   4) try-multiple catch - finally
+   5) try-finally
+
+
+**Example of exceptions:**
+`ArrayIndexOutOfBoundsException`
+  int[] arr = {2,4,5};
+  SOP(arr[9]);
+
+`NullPointerException`
+  String s = null;
+  System.out.println(s.length()); // NPE: NullPointerException
+
+`ArithmeticException`
+  System.out.println(9/0); // ArithmeticException
+
+`StringIndexOutOfBoundsException`
+  String s = "one";
+  System.out.println(s.charAt(5));// StringIndexOutOfBoundsException
+
+`NumberFormatException`
+  String s = "one";
+  int i = Integer.parseInt(s); // NFE: NumberFormatException
+
+Exception classes Hierarchy:
+
+"Throwable" is parent class of all exception classes.
+Top level hierarchy looks like below:
+
+        Throwable
+
+    Error           Exception
+
+              RuntimeExcepiton
+
+Exception under "Error" class are most critical and can not be handled programmatically.
+e.g. VirtualMachineError (JVM crash), OutOfMemoryError(Heap memory exhausted)
+
+There are two categories of exceptions:
+a) Checked Exception
+b) Unchecked exceptions
+
+Checked exceptions:
+- More critical
+- Parent of these exceptions is "Exception" class
+- Compiler enforces to handle these exception if any code is encountered which warns about checked exception.
+- Example: ServletException, ClassNotFoundException, IOException, FileNotFoundException, SQLException etc.
+
+UnChecked Exceptions:
+- Less critical
+- Parent is "RuntimeException"
+- Compiler does NOT enforces to handled these exceptions.
+- Ex. ArithmeticException, NumberFormatException, NullPointerException, ArrayIndexOutOfBoundsException etc.
+
+"throws" keyword:
+- This keyword is used with method signature.
+syntax: fun() throws <CheckedException1>, <CheckedException2>...
+e.g.
+    public void fun() throws IOException, SQLException {}
+
+- Using "throws" function owner tells outside world about possibility of a particular exception.
+e.g.
+    public void readStudentData(int rollNo) throws SQLException  { ... }
+In above function there is possibility of "SQLException" if invalid roll number is passed (Query will fail).
+
+- Compiler enforces consumer who calls such functions (Function having "throws" in signature) to handled exception written with "throws".
+Conusmer has 2 choices:
+1) Handle an exception using try-catch
+2) Ignore an exception by writing same exception in their own method signature using "throws"
+
+"throw" keyword:
+- Using "throw" keyword we can explicitly create an object of an exception and throw that exception.
+- In some situations we have to throw an exception to the caller as caller has passed wrong input.
+e.g.
+
+    public void validatePin(int pin) throws InvalidPINException {
+        // code to check pin validity
+        boolean isPinValid = checkPin();
+        if (!isValid) {
+          throw new InvalidPINException();
+          // explicitly throwing an exception (In this case "InvalidPINException" is our own custom exception class)
+        }
+        ...
+    }
+ - "throw" syntax:  throw new <CheckedExceptionClass>();
+
+ Example of User defined Exceptions:
+ - Java allows us to write our own exception classes.
+ - Mandatory step to define our own exception is - Class must extends "Exception" class.
+ e.g
+
+ "Exception Propogation"
+ - Whenever exception occurs JVM checks if exception is handled in current 
+ function. 
+ - If exception is NOT handled in current function then it is passed to 
+ previous function(caller).
+ - This chain continues till JVM.
+  
+    JVM -> main() -> f1() -> f2()
+Exception "AE" occurred in f2();
+AE will get propogated in sequence f2() -> f1() -> main() -> JVM
+
+Nested try-catch-finally block:
+
+
+  try {
+    ...
+    ...
+    try {
+      ....
+    }catch(ArithmeticException e2) {
+      ...
+    }
+    ...
+  }catch(Exception e1) {
+      ...
+      try {
+        ...
+      } catch {AIOBBE e1}
+  }

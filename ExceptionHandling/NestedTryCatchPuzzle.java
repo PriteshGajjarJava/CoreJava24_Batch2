@@ -1,5 +1,5 @@
 // a)java NestedTryCatchPuzzle b) java NestedTryCatchPuzzle 4 c) java NestedTryCatchPuzzle 4 10
-// d)java NestedTryCatchPuzzle ONE e) java NestedTryCatchPuzzle 2 TWO
+// d)java NestedTryCatchPuzzle ONE e) java NestedTryCatchPuzzle 2 TWO f) java NestedTryCatchPuzzle 0
 
 class NestedTryCatchPuzzle {
     public static void main(String[] args) {
@@ -8,10 +8,11 @@ class NestedTryCatchPuzzle {
             try {
                 System.out.println(20/n);
             }catch(ArithmeticException ae) {
+                System.out.println("AE");
                 System.out.println(args[1]);
             }finally {
                 System.out.println("FINALLY1");
-                System.out.println(50/n);
+                // System.out.println(50/n);//AE
             }
         }catch(ArrayIndexOutOfBoundsException aioob) {
             System.out.println("AIOOB");

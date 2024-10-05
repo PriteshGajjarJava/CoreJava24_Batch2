@@ -950,3 +950,80 @@ wait()/notify()/notifyAll():
     synchronized(obj) { try { obj.wait(); }catch(InterruptedException e) {} }
 
     synchronized(obj) { obj.notify(); } Both methods need to be called on SAME object.
+
+"Thread Safety"
+
+- If your class methods are used by any thread, you have to make sure that your class is "Thread-safe" class.
+- In class we can have methods which just reads data, we can also have method which perform write operation.
+- We need to apply thread safety on "write" methods.
+- If we do not apply thread safety, multiple thread can perform critical operation on same object which can result into inconsistent data.(wrong data)
+
+How to apply thread safety?
+Solution is "synchronized" keyword.
+
+"synchronized" keyword can be applied at 2 places.
+a) At method level
+b) Incode method using "synchronized" block.
+
+e.g.
+  synchronized void f1() {} 
+  void f2{
+    ....
+    synchronized(this) {
+      // critical code
+    }
+    ...
+  }
+
+To enter into synchronized block/method, a thread needs to acquire a lock on an object. Once lock is applied on an object,
+another thread can NOT enter into method/block unless it is completely executed.
+If two threads are entering into synchrnoized methods via two different objects, then there is no safety issue. Both can run in parallel.
+
+Synchornization is solution to achieve thread safety, with that Java will NOT allow multiple threads to execute critical operation on SAME object.
+
+Generally we make Write operations as synchronized. There is no need to make read operaiton as synchronized, because no harm in calling read operation at a time.
+
+**Object and class level locking: **
+
+  - To enter into instance synchronized method JVM applies lock on "object". (Object level lock)
+  - To enter into static synchronized method JVM applied lock on a "class". (Class level lock)
+  - There is NO relation between object level lock and class level lock. Both can co-exists.
+  - Lock is applied only for synchrnoized methods/block.
+  - If lock is applied on an object (e.g. account1), then any other thread want to do critical operation on same account1 will be blocked. Another thread will go in waiting queue. Once current thread's critical operation is over, thread2 will get a chance.
+
+**Package: **
+
+  - Package helps to achieve "Modularity" OOP principal.
+  - Using package we can orgnaise classes in better way. (logical/functional gropuing)
+  - "package" is keyword used to declare package of a class.
+  - This has to be 1st line in file.
+    Package declaration can consist of single word(e.g. pkg1) or more words(e.g. com.pga.ui)
+  - Using package we define boundry for class.
+
+ex.
+package com.pga.ui;
+class Calculator { }
+
+Java also provide it's in-built classes in form of packages.
+
+java.lang : Default package. All regular classes used frequently are in this package.(e.g. String, System, wrapper classes)
+- java.io : IO related classes java.util : Utility related classes java.sql : JDBC related classes (Database handling using Java)
+java.net : Networking related classes (e.g. Socket)
+java.sql : DB related classes
+java.awt : AWT UI javax.swing : Swing UI
+
+**Access Specifiers: **
+There are 4 access specifiers(scope) in Java.
+
+    private : Strict scope. Only accessed in same class
+    default : This is "package" level scope. This can be accessed in all classes from same package.
+    protected : Protected things are accessed in same package. It can also be accessed outside package ONLY in case of Inheritance.
+    public : Accessed everywhere
+
+Question?
+
+  - If i want to declare function which is useful only in current pacakge which scope i should give? default
+
+  - I want to allow access to my class to all classes(inside/outside package) which scope i should give? public
+
+  - What if i want to have a method which i am going to using in my class only, which scope i should give? private

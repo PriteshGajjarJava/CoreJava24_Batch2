@@ -1027,3 +1027,118 @@ Question?
   - I want to allow access to my class to all classes(inside/outside package) which scope i should give? public
 
   - What if i want to have a method which i am going to using in my class only, which scope i should give? private
+
+**Collection: **
+
+    Collection is nothing but data structures.
+
+    We can have following data structures in any programming languages.
+
+    a) Array - static, size is fixed b) Linked List -> Dynamic. Used for frequent update/delete c) Queue -> FIFO -> When we have to give priority in FIFO(First in first out) order. d) Stack -> LIFO -> When we have to give priority in LIFO(Last in first out) order. Priority will be given to most recently added data. e) Set -> Does NOT allow duplicates. Only unique elements are allowed. f) Map : Key->Value pair. Whenever we have to store association we use map. e.g. RollNo -> Student details Alphabate -> Words
+
+List:
+
+- Ordered collection (Data retrival order is same as data insertion order)
+- Index based collection. Data can be accessed using an index (like an array)
+- Used when sequence/order is important.
+
+3 options:
+1) Vector : Legacy(old) class. Synchrnoized (Thread safe)
+2) ArrayList  : Not synchronized. Faster.
+3) LinkedList : Used if frequent update/delete.
+
+How to create List object in Java?
+
+	List<Employee> list = new ArrayList<Employee>(); // list of emp objects
+	List<Integer> list = new LinkedList<Integer>();  // list of numbers
+
+ List functions:
+ 	add() -> To add element at the end.
+	get(index) -> Fetch data using index
+	contains(object) -> Check if data exists or not
+	remove(index) -> remove data at particular index
+	set(index, data) -> replace/udpate data at given index
+
+Set:
+
+- UnOrdered collection
+- Does NOT allow duplicates. (Only unique elements)
+- 3 options:
+	1) HashSet -> Unordered. Faster
+	2) LinkedHashSet -> Ordered 
+	3) TreeSet -> Sorted
+	
+How to create Set?
+	Set<Student> set = new HashSet<Student>();//Set of student
+	Set<String> words = new TreeSet<String>();//sorted set of words
+
+Map:
+
+- Key-value pair collection(Association)
+4 options:
+	
+	1) Hashtable - Legacy class. Synchronized, thread safe.
+	2) HashMap 	 - Not synchrnonized. Faster.
+	3) LinkedHashMap - Ordered
+	4) TreeMap	 - Sorted based on key.
+
+How to create Map?
+	
+	Map<Integer, String> studentInfo = new HashMap<Integer, String>(); // Map of rollNo -> name mapping.
+	Map<Integer, Emp> empInfo = new Hashtable<Integer, Emp>(); // Map of empId->Emp object
+
+	Diff between Hashtable and HashMap
+	
+		Hashtable does NOT allow null as a key.
+		HashMap allows null as a key
+
+Stack: LIFO Stack stack = new Stack(); stack.push(8); stack.pop();// remove top elements stack.peek();// returns top element but does NOT remove
+
+Queue: FIFO Queue queue = new LinkedList();
+
+Add: queue.add(<data>)
+Remove/poll: queue.remove() or queue.poll() removes first/head element
+peek : returns first element. Does NOT remove
+
+Object equality using hashCode() and equals() methods:
+
+Java derives equality of 2 objects using following steps. - It derives hashCode of both objects. - If hashCode is different it returns false. - If hashCode is same, then java calls equals() method to compare values of 2 objects. - If equals() is true then objects are equal otherwise objects are different.
+
+hashCode() and equals() both methods are from "Object" class.
+
+Whenever we create collection with user-defined types(e.g. Student, Emp) make sure we override both methods(equals() and hashCode()).
+
+How to override hashCode()?
+
+hashCode() should consist of Hash function which returns integer value by doing some calculation on object's data. Good hash function distributes data across buckets and avoid collision.
+
+If hashCode() of two objects is same then those objects may or may not be equals. However If equals() returns true for two objects then their hashCode() MUST be same.
+
+For user defiend types we have to define sorting logic so that Collections.sort(), TreeSet, TreeMap() works as expected. There are 2 options of defining sorting logic:
+
+    Using "Comparable" interface.
+
+     class Emp implements Comparable<Emp> {
+       	...
+     		public int compareTo(Emp o) {
+     			// return this.name.compareTo(o.name);
+     			return this.id > o.id ? 1 : -1;
+       		}
+     	...
+     }
+
+Inherit "Comparable" interface in user defined class and override compareTo() method. This has limitation of defining only one sorting logic.
+
+    Using "Comparator" interface.
+
+    Using this option we can define multiple sorting logic as below. class IDComparator implements Comparator { @Override public int compare(Student s1, Student s2) { return s1.id > s2.id ? 1 : -1; } }
+
+    class NameComparator implements Comparator { @Override public int compare(Student s1, Student s2) { return s1.name.compareTo(s2.name); } }
+
+    class MarksComparator implements Comparator { @Override public int compare(Student s1, Student s2) { return s1.marks > s2.marks ? -1 : 1; } }
+
+// Consumption side:
+
+  Collections.sort(list, new IDComparator());
+  Collections.sort(list, new NameComparator());
+  Collections.sort(list, new MarksComparator());
